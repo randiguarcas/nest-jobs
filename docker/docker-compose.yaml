@@ -1,0 +1,19 @@
+version: '3.6'
+services:
+  mongo-db:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: myadminsecretkey
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    depends_on:
+      - 'mongo-db'
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: myadminsecretkey
+      ME_CONFIG_MONGODB_URL: mongodb://root:myadminsecretkey@mongo-db:27017/
+# volumes:
+# flattlo_data:
